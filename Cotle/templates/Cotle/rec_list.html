@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Cotle</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="/">Cotle</a></h1>
+        </div>
+        {% for rec in Recs %}
+            <div>
+                <h3><a href ="">{{ rec.title }}</a></h3>
+                <p>{{ rec.content }}</p>
+                <p>{{ rec.pub_date| date:"y m d f" }}</p>
+            </div>
+        {% endfor %}
+    </body>
+</html>
