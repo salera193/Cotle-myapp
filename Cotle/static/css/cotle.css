@@ -1,0 +1,41 @@
+
+body{
+    background-color: white;
+}
+
+.page-header{
+    text-align:center;
+}
+
+.page-header h1 a{
+        color:#ffd700;
+}
+
+.rec-rapper{
+    margin-left:50px;
+    text-indent: 2em;
+    border-bottom:1px solid white;
+}
+
+.rec-owner{
+    color:black;
+}
+
+.rec-title {
+
+    color: #ffd700;
+}
+
+.rec-con-rapper{
+    padding-left:30px;
+    text-align: left;
+}
+
+.rec-content{
+    color:brack;
+}
+
+.rec-pub-date{
+    color:white;
+    text-align:right;
+}

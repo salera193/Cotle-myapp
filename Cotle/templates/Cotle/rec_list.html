@@ -1,17 +1,17 @@
-<html>
-    <head>
-        <title>Cotle</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Cotle</a></h1>
-        </div>
-        {% for rec in Recs %}
-            <div>
-                <h3><a href ="">{{ rec.title }}</a></h3>
-                <p>{{ rec.content }}</p>
-                <p>{{ rec.pub_date| date:"y m d f" }}</p>
+{% extends 'Cotle/base.html'%}
+
+{% block content %}
+     {% for rec in Recs %}
+        <div class="rec-rapper">
+            <br>
+            <p class="rec-owner">{{ rec.owner }}</p>
+            <h3><a href ="{% url 'rec_detail' pk=rec.pk %}" class="rec-title">{{ rec.title }}</a></h3>
+            <br>
+            <div class="rec-con-rapper">
+                 <p class="rec-content">{{ rec.content }}</p>
             </div>
-        {% endfor %}
-    </body>
-</html>
+            <br>
+            <p class="rec-pub-date">{{ rec.pub_date| date:"y m d f" }}</p>
+        </div>
+      {% endfor %}
+{% endblock %}

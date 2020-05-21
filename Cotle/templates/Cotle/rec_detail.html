@@ -1,0 +1,11 @@
+{% extends 'Cotle/base.html' %}
+
+{% block content %}
+    <div class="rec">
+        <div class="date">
+            {{ rec.pub_date }}
+        </div>
+        <h2>{{ rec.title }}</h2>
+        <p>{{ rec.content | linebreaksbr }}</p>
+    </div>
+{% endblock %}
