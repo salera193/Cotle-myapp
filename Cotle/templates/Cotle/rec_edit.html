@@ -1,0 +1,9 @@
+{% extends 'Cotle/base.html' %}
+
+{% block content %}
+    <h2>募集する</h2>
+    <form method="POST" class="rec-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn -default" >投稿</button>
+    </form>
+{% endblock %}
