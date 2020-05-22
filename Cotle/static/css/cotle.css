@@ -36,6 +36,10 @@ body{
 }
 
 .rec-pub-date{
-    color:white;
+    color:Black;
     text-align:right;
+}
+
+.top-manu{
+    color: #00bfff;
 }
