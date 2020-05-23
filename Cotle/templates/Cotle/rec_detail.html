@@ -2,10 +2,19 @@
 
 {% block content %}
     <div class="rec">
-        <div class="date">
-            {{ rec.pub_date }}
-        </div>
-        <h2>{{ rec.title }}</h2>
+        <h2 class="rec-title">{{ rec.title }}</h2>
+        <br>
         <p>{{ rec.content | linebreaksbr }}</p>
+        <br>
+        <div class="date">
+            {{ rec.pub_date | date:"y m d f"}}
+        </div>
     </div>
+    {% if apps %}
+    {% for app in apps %}
+    <div>
+        {{ app.owner }}
+    </div>
+    {% endfor %}
+    {% endif %}
 {% endblock %}

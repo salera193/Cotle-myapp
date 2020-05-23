@@ -7,17 +7,19 @@ from .forms import RecForm
 def rec_list(request):
     
     Recs = Recruit.objects.order_by('pub_date').reverse()
-
+    
     
     params ={
-        'Recs': Recs, 
+        'Recs': Recs,         
              }
     return render(request, 'Cotle/rec_list.html', params)
 
 def rec_detail(request, pk):
     rec = get_object_or_404(Recruit, pk=pk)
+    apps = rec.apply_rec.all()
     params={
-        'rec':rec
+        'rec':rec,
+        'apps': apps,
         }
     return render(request, 'Cotle/rec_detail.html', params)    
 
@@ -38,15 +40,20 @@ def rec_new(request):
     params = {'form':form }
     return render(request, 'Cotle/rec_edit.html', params)
 
+
 def app_new(request, pk):
+    if request.user.is_authenticated:
+        app= Apply()
+        app.owner = request.user
+        app.recruit = get_object_or_404(Recruit,pk=pk)
+        app.save()
+        
+        rec = get_object_or_404(Recruit, pk=pk)
+        rec.appcount +=1
+        rec.save()
     
-    app= Apply()
-    app.owner = request.user
-    app.recruit = get_object_or_404(Recruit,pk=pk)
-    app.save()
+    else:
+        pass
     
-    rec = get_object_or_404(Recruit, pk=pk)
-    rec.appcount +=1
-    rec.save()
     
     return redirect(to='/')

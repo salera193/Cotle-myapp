@@ -12,7 +12,7 @@
             </div>
             <br>
             <p class="rec-pub-date">{{ rec.pub_date| date:"y m d f" }}</p>
-            <p class="app-count">{{ rec.appcount }}</p>
+            <p class="app-count">Users : {{ rec.appcount }}</p>
             <a href="{% url 'app_new' pk=rec.pk %}"><button type="submit" class="save btn btn-default" >Apply!</button></a>
         </div>
       {% endfor %}
