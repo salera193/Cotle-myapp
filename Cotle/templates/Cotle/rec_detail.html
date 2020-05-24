@@ -13,8 +13,9 @@
     {% if apps %}
     {% for app in apps %}
     <div>
-        {{ app.owner }}
+        <h2>{{ app.owner }}</h2>
     </div>
+    <br>
     {% endfor %}
     {% endif %}
 {% endblock %}

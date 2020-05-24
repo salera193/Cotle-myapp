@@ -4,11 +4,13 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from .forms import RecForm
 
+
+
+
 def rec_list(request):
     
     Recs = Recruit.objects.order_by('pub_date').reverse()
-    
-    
+        
     params ={
         'Recs': Recs,         
              }
@@ -55,5 +57,17 @@ def app_new(request, pk):
     else:
         pass
     
-    
     return redirect(to='/')
+
+def app_del(request, pk):
+    if request.user.is_authenticated:
+    
+        rec = get_object_or_404(Recruit,pk=pk) 
+        rec.appcount -= 1
+        rec.save()
+
+        
+        app = Apply.objects.filter(owner=request.user).filter(recruit=rec)
+        app.delete()
+    return redirect(to='/')
+
