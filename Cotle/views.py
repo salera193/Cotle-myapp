@@ -12,6 +12,7 @@ def rec_list(request):
     Recs = Recruit.objects.order_by('pub_date').reverse()
         
     params ={
+
         'Recs': Recs,         
              }
     return render(request, 'Cotle/rec_list.html', params)
@@ -44,18 +45,20 @@ def rec_new(request):
 
 
 def app_new(request, pk):
-    if request.user.is_authenticated:
+
+    rec = get_object_or_404(Recruit, pk=pk)
+    is_app = Apply.objects.filter(owner=request.user).filter(recruit=rec).count()
+    
+    if is_app==0:
+    
         app= Apply()
         app.owner = request.user
         app.recruit = get_object_or_404(Recruit,pk=pk)
         app.save()
-        
-        rec = get_object_or_404(Recruit, pk=pk)
+            
         rec.appcount +=1
         rec.save()
     
-    else:
-        pass
     
     return redirect(to='/')
 
