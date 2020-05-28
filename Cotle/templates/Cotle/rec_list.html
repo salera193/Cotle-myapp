@@ -10,11 +10,11 @@
             <div class="rec-con-rapper">
                  <p class="rec-content">{{ rec.content }}</p>
             </div>
+            <a href="{% url 'app_new' pk=rec.pk %}"><button type="submit" class="save btn btn-default" >Apply !</button></a>
+            <a href="{% url 'app_del' pk=rec.pk %}"><button type="submit" class="save btn btn-default" >cancel...</button></a>
             <br>
             <p class="rec-pub-date">{{ rec.pub_date| date:"y m d f" }}</p>
             <p class="app-count">Users : {{ rec.appcount }}</p>
-            <a href="{% url 'app_new' pk=rec.pk %}"><button type="submit" class="save btn btn-default" >Apply!</button></a>
-            <a href="{% url 'app_del' pk=rec.pk %}"><button type="submit" class="save btn btn-default" >cancel...</button></a>
         </div>
       {% endfor %}
 {% endblock %}

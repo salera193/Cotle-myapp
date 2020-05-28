@@ -13,7 +13,12 @@
     {% if apps %}
     {% for app in apps %}
     <div>
+        {% if app.accept %}
+            <h3>Accepted!</h3>
+        {% endif %}
         <h2>{{ app.owner }}</h2>
+        <a href="{% url 'acc_app' pk=app.pk rpk=app.recruit.pk %}"><button type="submit" class="save btn btn-default" >Accept</button></a>
+        <a href="{% url 'acc_cancel' pk=app.pk rpk=app.recruit.pk %}"><button type="submit" class="save btn btn-default" >Cancel</button></a>
     </div>
     <br>
     {% endfor %}

@@ -47,8 +47,9 @@ def rec_new(request):
 def app_new(request, pk):
 
     rec = get_object_or_404(Recruit, pk=pk)
+    #アプライしたかどうかの確認
     is_app = Apply.objects.filter(owner=request.user).filter(recruit=rec).count()
-    
+       
     if is_app==0:
     
         app= Apply()
@@ -74,3 +75,27 @@ def app_del(request, pk):
         app.delete()
     return redirect(to='/')
 
+def acc_app(request, pk, rpk):
+    
+    app = get_object_or_404(Apply,pk=pk)
+    rec = get_object_or_404(Recruit,pk=rpk)
+    
+    #accept処理
+    app.accept = True
+    app.save()
+    
+    
+    return redirect('rec_detail', pk=rec.pk)
+
+
+def acc_cancel(request, pk, rpk):
+    
+    app = get_object_or_404(Apply,pk=pk)
+    rec = get_object_or_404(Recruit,pk=rpk)
+    
+    #accept処理
+    app.accept = False
+    app.save()
+    
+    
+    return redirect('rec_detail', pk=rec.pk)
