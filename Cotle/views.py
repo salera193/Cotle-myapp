@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Recruit, Apply
+from .models import Recruit, Apply, Accept
 from django.utils import timezone 
 from django.shortcuts import get_object_or_404
 from .forms import RecForm
@@ -55,6 +55,7 @@ def app_new(request, pk):
         app= Apply()
         app.owner = request.user
         app.recruit = get_object_or_404(Recruit,pk=pk)
+        app.pub_date = timezone.now()
         app.save()
             
         rec.appcount +=1
@@ -84,6 +85,14 @@ def acc_app(request, pk, rpk):
     app.accept = True
     app.save()
     
+    #メッセージ作成
+    acc = Accept()
+    acc.owner = request.user
+    acc.rec = rec
+    acc.app = app
+    acc.content = "Applyが承認されました。"
+    acc.pub_date = timezone.now()
+    app.save()
     
     return redirect('rec_detail', pk=rec.pk)
 
@@ -97,5 +106,22 @@ def acc_cancel(request, pk, rpk):
     app.accept = False
     app.save()
     
+    #メッセージ削除
+    acc = Accept.objects.filter(app=app).filter(owner=request.user)
+    acc.delete()
     
     return redirect('rec_detail', pk=rec.pk)
+
+
+def notify(request):
+    
+    app = Apply.objects.filter(owner=request.user)
+    
+    acc = Accept.objects.filter(app=app).order_by('pub_date').reverse()
+    
+    params = {
+        'app':app,
+        'acc':acc,
+        }
+    
+    return render(request, 'Cotle/notify.html', params)

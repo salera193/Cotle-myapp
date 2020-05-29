@@ -9,5 +9,6 @@ urlpatterns = [
     path('app/del/<int:pk>/', views.app_del, name='app_del'),
     path('rec/acc/<int:pk>/<int:rpk>/', views.acc_app, name='acc_app'),
     path('rec/acc/cancel/<int:pk>/<int:rpk>/', views.acc_cancel, name='acc_cancel'),
+    path('notify/', views.notify, name='notify'),
     ]
 

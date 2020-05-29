@@ -28,12 +28,14 @@ class Apply(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='apply_owner')
     recruit = models.ForeignKey(Recruit, on_delete=models.CASCADE, related_name='apply_rec')
     accept = models.BooleanField(default=False)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     
 class Accept(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='acc_owner', null=True)
     rec = models.ForeignKey(Recruit, on_delete=models.CASCADE, related_name='acc_rec')
     app = models.ForeignKey(Apply, on_delete=models.CASCADE, related_name='acc_app')
     content = models.CharField(max_length=100)
-         
+    pub_date = models.DateTimeField(auto_now_add=True,null=True)     
 
     
